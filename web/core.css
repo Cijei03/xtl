@@ -1,0 +1,46 @@
+header 
+{
+	font-family: 'Barlow', sans-serif;
+	font-weight: 400;
+  	font-style: normal;
+	background-color: #f10d0c;
+	height: fit-content;
+	width: 100%;
+	float: left;
+	color: white;
+	font-size: 20px;
+}
+
+.header-div
+{
+	float: left;
+	margin-top: 17px;
+}
+
+section
+{
+	font-family: "Barlow", sans-serif;
+  	font-weight: 500;
+  	font-style: normal;
+}
+
+#specifications_title
+{
+	margin-bottom: 20px;
+}
+
+#specifications_title:hover
+{
+	color: #aaaaaa;
+}
+a
+{
+	text-decoration: none;
+	color: #5e7eff;
+	font-size: inherit;
+}
+
+#specifications_list
+{
+	font-size: 20px;
+}
