@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../fonts.css">
+		<link rel="stylesheet" href="../core.css">
+		<link rel="shortcut icon" href="../resources/xtl_minilogo.webp" type="image/x-icon">
+		<style>
+			.spec_list-entry
+			{
+				font-size: 22px;
+				font-family: 'Barlow', sans-serif;
+				font-weight: 400;
+				font-style: normal;
+				margin-top: 15px;
+				float: left;
+				width: 100%;
+				font-size: 15px;
+			}
+		</style>
+		<title>XTL</title>
+	</head>
+	<body>
+		<header style="height: 45px; font-weight: 600; text-align: center; padding-top: 15px; font-size: 25px;">
+			XTLP C++
+		</header>
+		<section style="float: left; text-align: center; font-size: 28px; width: 100%; margin-top: 30px;">
+			<div class="spec_list-entry">
+				<a href="../resources/xtlp-100-source_code.tar.gz" download>
+					xtlp-100-source_code.tar.gz
+				</a>
+			</div>
+			<div style="font-weight: 300; font-size: 15px; margin-top: 20px; float: left; text-align: center; width: 100%;">
+				Code wasn't tested within MSVC toolchain. When compiling with GCC, version 14 at least required. No additional dependencies needed.<br />
+				Recommended way to install it on Linux is just use below command in directory that contains CMakeLists.txt.
+			</div>
+			<div style="font-family: monospace; font-weight: 200; padding: 20px; background-color: rgb(211, 211, 211); width: 100%; float: left; font-size: 15px; margin-top: 20px;">
+				mkdir build && cd build && cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release && sudo make install
+			</div>
+			<div style="font-weight: 300; font-size: 15px; margin-top: 20px; float: left; text-align: center; width: 100%;">
+				Tested on EndeavourOS 2025.03.19.
+			</div>
+		</section>
+	</body>
+</html>
