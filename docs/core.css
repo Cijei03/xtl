@@ -8,13 +8,37 @@ header
 	width: 100%;
 	float: left;
 	color: white;
-	font-size: 20px;
+	font-size: 2vh;
 }
 
 body
 {
-	height: 86vh;
 	overflow-y: visible;
+}
+
+section
+{
+	width: 900px;
+	margin-left: calc((100% - 900px) / 2);
+	height: 80vh;
+}
+
+footer
+{
+	padding: 3vh 0px 3vh 0px;
+	float: left;
+}
+
+@media screen and (max-width: 900px)
+{
+	section
+	{
+		width: 95%; /* The width is 100%, when the viewport is 800px or smaller */
+		margin-left: 0%;
+		margin: 2.5%;
+		float: left;
+		height: max-content;
+	}
 }
 
 .header-div
@@ -28,7 +52,8 @@ section
 	font-family: "Barlow", sans-serif;
   	font-weight: 500;
   	font-style: normal;
-	height: 100%;
+	float: left;
+	padding-bottom: 50px;
 }
 
 #specifications_title
@@ -50,4 +75,20 @@ a
 #specifications_list
 {
 	font-size: 20px;
+}
+
+.category
+{
+	width: 100%;
+	float: left;
+}
+
+.spec_list-entry
+{
+	font-family: 'Barlow', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	margin-top: 15px;
+	float: left;
+	width: 100%;
 }

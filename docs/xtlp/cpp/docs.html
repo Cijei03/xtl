@@ -3,31 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="../fonts.css">
-		<link rel="stylesheet" href="../core.css">
-		<link rel="shortcut icon" href="../resources/xtl_minilogo.webp" type="image/x-icon">
+		<link rel="stylesheet" href="../../fonts.css">
+		<link rel="stylesheet" href="../../core.css">
+		<link rel="shortcut icon" href="../../resources/xtl_minilogo.webp" type="image/x-icon">
 		<style>
-			.spec_list-entry
-			{
-				font-size: 22px;
-				font-family: 'Barlow', sans-serif;
-				font-weight: 400;
-				font-style: normal;
-				margin-top: 15px;
-				float: left;
-				width: 100%;
-				font-size: 15px;
-			}
-			body
-			{
-				height: 100vh;
-				overflow-y: visible;
-			}
-			section
-			{
-				margin-bottom: 100px;
-			}
-
 			b
 			{
 				font-weight: 600;
@@ -58,14 +37,14 @@
 		<title>XTL</title>
 	</head>
 	<body>
-		<header style="height: 45px; font-weight: 600; text-align: center; padding-top: 15px; font-size: 25px;">
+		<header style="text-align: center; font-weight: 600; font-size: 170%; padding: 2vh 0vh 3vh 0vh; height: 3vh; float: left;">
 			XTLP C++ How to use
 		</header>
-		<section style="float: left; text-align: center; font-size: 28px; width: 100%; margin-top: 30px;">
-			<div style="font-weight: 300; font-size: 15px; margin-top: 20px; float: left; text-align: left; width: 90%; margin-left: 5%;">
+		<section style="text-align: center; float: left;  margin-bottom: 100px;">
+			<div style="font-weight: 300; margin-top: 20px; float: left; text-align: left;">
 				Core of XTLP are two classes - XTNode and XTNodesStack.<br /><br />
 				Their definition looks like:<br />
-				<div style="font-family: monospace; font-weight: 300; padding: 20px; background-color: #e6e6e6; width: 100%; float: left; font-size: 13px; margin-top: 20px; text-align: left; margin-bottom: 20px;">
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
 					<b>struct</b> <t>XTNode</t><br />
 					{<br />
 						<t>&MediumSpace; &MediumSpace;std::string</t> Name;<br />
@@ -79,16 +58,16 @@
 						&MediumSpace; &MediumSpace;<t>std::vector&lt;<b>const</b> XTNode<b>*</b>&gt;</t> <f>Read</f>(<t>std::string_view</t> FileName);<br />
 					};<br />
 				</div>
-				<span style="font-weight: 600; font-size: 20px;">XTNode</span><br />
+				<span style="font-weight: 600; font-size: 170%;">XTNode</span><br />
 				Every XTNode represents section of XTL file. Due to every section may be named or unnamed, <span style="color: #f10d0c;">Name</span> member may contain empty string. <span style="color: #f10d0c;">Pairs</span> are keys and their values defined in node scope.<br />
 				Access to subsections is done through <span style="color: #f10d0c;">Childs</span> member.<br /><br />
-				<span style="font-weight: 600; font-size: 20px;">XTNodesStack</span><br />
+				<span style="font-weight: 600; font-size: 170%;">XTNodesStack</span><br />
 				This class handles nodes allocations and deallocations, reads XTL files and processes its content into tree representation. So lifetime of nodes returned by Read method is equivalent to lifetime XTNodesStack object.<br />
 				Pay attention for it.<br /><br />
 				XTNodesStack::Read method as mentioned before - reads and processes XTL files. As argument it takes path into XTL file.<br /><br /><br />
-				<span style="font-weight: 600; font-size: 20px;">How to use - example</span><br />
+				<span style="font-weight: 600; font-size: 170%;">How to use - example</span><br />
 				Firstly, define XTL file named cfg.xtl:
-				<div style="font-family: monospace; font-weight: 300; padding: 20px; background-color: #e6e6e6; width: 100%; float: left; font-size: 13px; margin-top: 20px; text-align: left; margin-bottom: 20px; color: #5e7eff;">
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px; color: #5e7eff;">
 					&lt;XTH<br />
 					&MediumSpace; &MediumSpace; <xtL_key>v</xtL_key>=<xtl_val>'100'</xtl_val><br />
 				&lt;students<br />
@@ -107,7 +86,7 @@
 					&MediumSpace; &MediumSpace; <span style="color: #00c6ff;">unnamed_key</span>=<span style="color: #a7074b;">'ghf'</span><br />
 				</div><br />
 				Now define our C++ code in xtl.cpp:
-				<div style="font-family: monospace; font-weight: 300; padding: 20px; background-color: #e6e6e6; width: 100%; float: left; font-size: 13px; margin-top: 20px; text-align: left; margin-bottom: 20px;">
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
 					<b>#include</b> <str>&lt;print&gt;</str><br />
 					<b>#include</b> <str>&lt;xtlp.hpp&gt;</str><br /><br />
 					<b>void</b> <f>DisplayContent</f>(<t>std::vector&lt;<b>const</b> XTLP::XTNode<b>*</b>&gt;</t> Nodes)<br />
@@ -134,13 +113,13 @@
 				We will start overview from <span style="color: #f10d0c;">main</span> function. Firstly creation of <span style="color: #f10d0c;">XTLP::XTNodesStack</span> object named XTStack is required - we must store somewhere our nodes. Later, 
 				we use <span style="color: #f10d0c;">Read</span> method to parse and process all nodes contained in XTL file named <span style="color: #f10d0c;">cfg.xtl</span>. All root nodes are returned into <span style="color: #f10d0c;">Childs</span> variable.
 				Next step is just to display recursively all of them (and their pairs) into console. So compile our code, make it executable and run:<br />
-				<div style="color:#5e7eff; font-weight: 500; font-family: monospace; font-size: 13px; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
+				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
 					$ g++ -std=c++23 -O3 -o xtl_exe xtl.cpp -lxtlp<br />
 					$ sudo chmod +x xtl_exe<br />
 					$ ./xtl_exe
 				</div><br />
 				Then we will see content of our xtl file:
-				<div style="color:#5e7eff; font-weight: 500; font-family: monospace; font-size: 13px; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
+				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
 					Node name: XTH<br />
 					Pair: v = 100<br />
 					Node name: students<br />

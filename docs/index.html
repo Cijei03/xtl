@@ -7,88 +7,133 @@
 		<link rel="stylesheet" href="core.css">
 		<link rel="shortcut icon" href="resources/xtl_minilogo.webp" type="image/x-icon">
 		<title>XTL</title>
+		<style>
+			table
+			{
+				width: 100%;
+				text-align: center;
+
+				border-width: 1px;
+				border-style: solid;
+				border-color: black;
+				border-collapse: collapse;
+			}
+			th
+			{
+				font-weight: inherit;
+				font-size: inherit;
+				font-family: inherit;
+				width: 20%;
+				text-align: inherit;
+
+				border-width: 1px 0px 1px 0px;
+				border-style: solid;
+				border-color: black;
+				border-collapse: inherit;
+				padding: 6px 0px 6px;
+			}
+			td
+			{
+				font-weight: inherit;
+				font-size: inherit;
+				font-family: inherit;
+				text-align: center;
+
+				border-width: 1px 0px 1px 0px;
+				border-style: solid;
+				border-color: black;
+				border-collapse: inherit;
+			}
+			tr
+			{
+				border-width: inherit;
+				border-style: inherit;
+				border-color: inherit;
+				border-collapse: inherit;
+			}
+		</style>
 	</head>
 	<body>
 		<header>
-			<img src="resources/xtl_logo.webp" alt="" style="height: 40px; padding: 10px 0px 10px 2%; float: left; background-color: f10d0c;">
+			<img src="resources/xtl_logo.webp" alt="" style="height: 4vh; padding: 10px 0px 10px 2%; float: left;">
 			<div class="header-div" style="float: right; margin-right: 2%;">Latest update: 2 August 2025</div>
 		</header>
-		<section style="float: left; text-align: center; font-size: 28px; width: 100%; margin-top: 30px;">
-			<div style="cursor: pointer;">
+		<section style="float: left; text-align: center; margin-top: 30px; ">
+			<div class="category">
+				<div style="cursor: pointer; font-size: 170%;">
 				Specification
+				</div>
+				<div style="font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
+					<a href="species/rev100.html" target="_blank" class="">Here</a> you can find latest specification. Older specifications are available in <a href="archive.html" target="_blank">archive</a>.
+				</div>
 			</div>
-			<div style="font-size: 18px; font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
-				<a href="species/rev100.html" target="_blank" class="">Here</a> you can find latest specification. Older specifications are available in <a href="archive.html" target="_blank">archive</a>.
-			</div>
-			<div style="margin-top: 30px; float: left; width: 100%;">
-				<div>
+			<div class="category">
+				<div style="font-size: 170%; margin-top: 30px;">
 					XTLP
 				</div>
-				<div style="font-size: 18px; font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
+				<div style="font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
 					XTLP is eXtensible Tree Language Parser which allows to easy read XTL files.
 				</div>
-				<div style="font-size: 18px; margin-left: calc((100% - 400px) / 2); width: 400; margin-top: 15px; text-align: center;">
-					<div style="color: black; width: 100px; text-align: left; float: left;">
-						C++
-					</div>
-					<div style="font-size: 18px; width: 100px; float: left; margin-left: 50px;">
-						<a href="xtlp/downloads.html" style="float: left;">
-							Downloads
-						</a>
-					</div>
-					<div style="font-size: 18px; width: 100px; float: left; margin-left: 50px;">
-						<a href="xtlp/docs.html" style="width: 100px; margin-right: 10px; float: left;">
-							How to use
-						</a>
-					</div>
-				</div><br />
-				<!--
-				<div style="font-size: 18px; margin-left: calc((100% - 400px) / 2); width: 400; text-align: center;">
-					<div style="color: black; width: 100px; text-align: left; float: left;">
-						Python
-					</div>
-					<div style="font-size: 18px; width: 100px; float: left; margin-left: 50px;">
-						<a href="" style="float: left;">
-							Downloads
-						</a>
-					</div>
-					<div style="font-size: 18px; width: 100px; float: left; margin-left: 50px;">
-						<a href="" style="width: 100px; margin-right: 10px; float: left;">
-							How to use
-						</a>
-					</div>
+				<div style="width: 100%; text-align: left; margin-top: 20px; float: left;">
+					<table>
+						<tr>
+							<th>C++</th>
+							<td>
+								<a href="xtlp/cpp/downloads.html">
+									Downloads
+								</a>
+							</td>
+							<td>
+								<a href="xtlp/cpp/docs.html">
+									How to use
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<th>Python</th>
+							<td>
+								<a href="">
+									Downloads
+								</a>
+							</td>
+							<td>
+								<a href="">
+									How to use
+								</a>
+							</td>
+						</tr>
+					</table>
 				</div>
-				-->
 			</div>
-			<div style="margin-top: 30px; float: left; width: 100%;">
-				<div>
-					VSIX
+			<div class="category">
+				<div style="font-size: 170%; margin-top: 30px;">
+					Developer tools
 				</div>
-				<div style="font-size: 18px; font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
+				<div style="font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
 					Visual Studio Code plugin adding support for XTL language coming soon...
 				</div>
 			</div>
-			<div style="margin-top: 30px; float: left; width: 100%;">
-				<div>
+			<div class="category">
+				<div style="font-size: 170%; margin-top: 30px;">
 					Contributors
 				</div>
-				<div style="font-size: 18px; font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px; text-align: left; margin-left: 5%;">
+				<div style="font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
 					<b>Mateusz Sadowski</b> - main XTL maintainer, programmer of C++ and Python XTLP implementations; direct contact via email: <a href="mailto:mateusz.sadowski85@gmail.com">mateusz.sadowski85@gmail.com</a>.
 				</div>
-				<div style="font-size: 18px; font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px; text-align: left; margin-left: 5%;">
+				<div style="font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
 					<b>Dawid Maciakiewicz</b> - main translator, he cares about proper English grammary on this page; direct contact via email: <a href="dawidmaciakiewicz@gmail.com">dawidmaciakiewicz@gmail.com</a>.
 				</div>
 			</div>
-			<div style="margin-top: 30px; float: left; width: 100%;">
-				<div>
+			<div class="category">
+				<div style="font-size: 170%; margin-top: 30px;">
 					Issues
 				</div>
-				<div style="font-size: 18px; font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px; text-align: left; margin-left: 5%;">
+				<div style="font-family: 'Barlow', sans-serif; font-weight: 400; font-style: normal; margin-top: 15px;">
 					Please issues about this page content, XTL or XTLP report on <a href="https://github.com/Cijei03/xtl" target="_blank">github repository</a>. Do NOT send them into direct contacts, reports in this way will be ignored.
 				</div>
 			</div>
 		</section>
-		<footer style="background-color: black; float: left; width: 100%; color: white; font-family: 'Barlow'; text-align: center; padding: 2vh 0px 2vh 0px;">
+		<footer style="background-color: black; float: left; width: 100%; color: white; font-family: 'Barlow'; text-align: center;">
 			Copyright © 2025 Mateusz Sadowski. All rights reserved.
 		</footer>
 	</body>
