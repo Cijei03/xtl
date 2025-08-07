@@ -38,33 +38,20 @@
 	</head>
 	<body>
 		<header style="text-align: center; font-weight: 600; font-size: 170%; padding: 2vh 0vh 3vh 0vh; height: 3vh; float: left;">
-			XTLP C++ - How to use
+			XTLP Python - How to use
 		</header>
 		<section style="text-align: center;">
 			<div style="font-weight: 300; margin-top: 20px; float: left; text-align: left;">
-				Core of XTLP are two classes - XTNode and XTNodesStack.<br /><br />
-				Their definition looks like:<br />
+				Core of is just XTNode class. Its definition looks like:<br />
 				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
-					<b>struct</b> <t>XTNode</t><br />
-					{<br />
-						<t>&MediumSpace; &MediumSpace;std::string</t> Name;<br />
-						<t>&MediumSpace; &MediumSpace;std::map&lt;std::string, std::string&gt;</t> Pairs;<br />
-						<t>&MediumSpace; &MediumSpace;std::vector&lt;<b>const</b> XTNode<b>*</b>&gt; </t> Childs;<br />
-					};<br />
-					<br />
-					<b>class</b> <t>XTNodesStack</t><br />
-					{<br />
-						<b>public:<br /></b>
-						&MediumSpace; &MediumSpace;<t>std::vector&lt;<b>const</b> XTNode<b>*</b>&gt;</t> <f>Read</f>(<t>std::string_view</t> FileName);<br />
-					};<br />
+					<b>class</b> <t>XTNode</t>:<br />
+						&MediumSpace; &MediumSpace;self.name :<t> str</t><br />
+						&MediumSpace; &MediumSpace;self.pair :<t> dict</t>[<t>str</t>, <t>str</t>]<br />
+						&MediumSpace; &MediumSpace;self.childs :<t> list</t>[<t>XTNode</t>]<br />
 				</div>
 				<span style="font-weight: 600; font-size: 170%;">XTNode</span><br />
-				Every XTNode represents section of XTL file. Due to every section may be named or unnamed, <span style="color: #f10d0c;">Name</span> member may contain empty string. <span style="color: #f10d0c;">Pairs</span> are keys and their values defined in node scope.<br />
-				Access to subsections is done through <span style="color: #f10d0c;">Childs</span> member.<br /><br />
-				<span style="font-weight: 600; font-size: 170%;">XTNodesStack</span><br />
-				This class handles nodes allocations and deallocations, reads XTL files and processes its content into tree representation. So lifetime of nodes returned by Read method is equivalent to lifetime XTNodesStack object.<br />
-				Pay attention for it.<br /><br />
-				XTNodesStack::Read method as mentioned before - reads and processes XTL files. As argument it takes path into XTL file.<br /><br /><br />
+				Every XTNode represents section of XTL file. Due to every section may be named or unnamed, <span style="color: #f10d0c;">name</span> member may contain empty string. <span style="color: #f10d0c;">pairs</span> are keys and their values defined in node scope.<br />
+				Access to subsections is done through <span style="color: #f10d0c;">childs</span> member.<br /><br />
 				<span style="font-weight: 600; font-size: 170%;">How to use - example</span><br />
 				Firstly, define XTL file named cfg.xtl:
 				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px; color: #5e7eff;">
@@ -85,40 +72,23 @@
 				&lt;<br />
 					&MediumSpace; &MediumSpace; <span style="color: #00c6ff;">unnamed_key</span>=<span style="color: #a7074b;">'ghf'</span><br />
 				</div><br />
-				Now define our C++ code in xtl.cpp:
+				Now define our Python code in test.py:
 				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
-					<b>#include</b> <str>&lt;print&gt;</str><br />
-					<b>#include</b> <str>&lt;xtlp.hpp&gt;</str><br /><br />
-					<b>void</b> <f>DisplayContent</f>(<t>std::vector&lt;<b>const</b> XTLP::XTNode<b>*</b>&gt;</t> Nodes)<br />
-					{<br />
-						&MediumSpace; &MediumSpace; <b>for</b> (<b>auto&</b> N : Nodes)<br />
-						&MediumSpace; &MediumSpace; {<br />
-							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>std::println</f>(<str>"Node name: {0}"</str>, N->Name); <br />
-							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <b>for</b> (<b>auto&</b> P : N->Pairs)<br />
-							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; {<br />
-							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>std::println</f>(<str>"Pair: {0} = {1}"</str>, P.first, P.second);<br />
-							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; }<br />
-							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>DisplayContent</f>(N->Childs);<br />
-						&MediumSpace; &MediumSpace; }<br />
-					}<br /><br />
+					<b>import <t>xtlp_r100</t> as <t>xtlp</t></b><br /><br/>
 
-					<b>int</b> <f>main</f>()<br />
-					{<br />
-						&MediumSpace; &MediumSpace; <t>XTLP::XTNodesStack</t> XTStack;<br />
-						&MediumSpace; &MediumSpace; <b>auto</b> Childs = XTStack.<f>Read</f>(<str>"cfg.xtl"</str>);<br />
-						&MediumSpace; &MediumSpace; <f>DisplayContent</f>(Childs);<br /><br />
-						&MediumSpace; &MediumSpace; <b>return</b> 0;<br />
-					}
+					<b>def</b> <f>display_content</f>(Nodes : <t>list</t>[<t>xtlp.XTNode</t>]) -> <t>None</t>:<br />
+						&MediumSpace; &MediumSpace; <b>for</b> n <b>in</b> Nodes:<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>print</f>(<str>"Node name: {}"</str>.format(N.name))<br /><br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <b>for</b> P <b>in</b> N.pairs.<f>items</f>():<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>print</f>(<str>"Pair: {}"</str>.format(P))<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>display_content</f>(N.childs);<br />
+					<br /><br />
+
+					stack = xtlp.<f>make_stack</f>(<str>"cfg.xtl"</str>)<br />
+					<f>display_content</f>(stack);<br />
 				</div><br />
-				We will start overview from <span style="color: #f10d0c;">main</span> function. Firstly creation of <span style="color: #f10d0c;">XTLP::XTNodesStack</span> object named XTStack is required - we must store somewhere our nodes. Later, 
-				we use <span style="color: #f10d0c;">Read</span> method to parse and process all nodes contained in XTL file named <span style="color: #f10d0c;">cfg.xtl</span>. All root nodes are returned into <span style="color: #f10d0c;">Childs</span> variable.
-				Next step is just to display recursively all of them (and their pairs) into console. So compile our code, make it executable and run:<br />
-				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
-					$ g++ -std=c++23 -O3 -o xtl_exe xtl.cpp -lxtlp<br />
-					$ sudo chmod +x xtl_exe<br />
-					$ ./xtl_exe
-				</div><br />
-				Then we will see content of our xtl file:
+				As you can see - usage is simple; just call <span style="color: #f10d0c;">make_stack</span> function from xtlp module and you can read all nodes by <span style="color: #f10d0c;">stack</span> variable.
+				Next step is just to display recursively all of them (and their pairs) into console. After running our script content of cfg.xtl is printed:
 				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
 					Node name: XTH<br />
 					Pair: v = 100<br />
