@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../fonts.css">
+		<link rel="stylesheet" href="../../core.css">
+		<link rel="shortcut icon" href="../../resources/xtl_minilogo.webp" type="image/x-icon">
+		<style>
+			b
+			{
+				font-weight: 600;
+				color: black;
+			}
+			f
+			{
+				color: #ff7b00;
+			}
+			str
+			{
+				color: #00aa00;
+			}
+			t
+			{
+				color: #4400ff;
+			}
+
+			xtl_key
+			{
+				color:#00c6ff;
+			}
+			xtl_val
+			{
+				color:#a7074b;
+			}
+		</style>
+		<title>XTL</title>
+	</head>
+	<body>
+		<header style="text-align: center; font-weight: 600; font-size: 170%; padding: 2vh 0vh 3vh 0vh; height: 3vh; float: left;">
+			XTLP C - How to use
+		</header>
+		<section style="text-align: center;">
+			<div style="font-weight: 300; margin-top: 20px; float: left; text-align: left;">
+				Core of XTLP are two classes - xtlpNode and xtlpNodesStack.<br /><br />
+				Their definition looks like:<br />
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
+					<b>typedef</b> <b>struct</b> <t>xtlpNode_t</t><br />
+					{<br />
+						<t>&MediumSpace; &MediumSpace;char</t><b>*</b> Name;<br />
+						<t>&MediumSpace; &MediumSpace;xtlpPair</t><b>*</b> Pairs;<br />
+						<t>&MediumSpace; &MediumSpace;struct<b></b> xtlpNode_t<b>**</b> </t> Childs;<br />
+						&MediumSpace; &MediumSpace;<t><b>void*</b></t> private__;<br />
+					} <t>xtlpNode</t>; <br />
+					<br />
+					<b>typedef struct</b> <t>xtlpNodesStack_t</t><br />
+					{<br />
+						&MediumSpace; &MediumSpace;<t><b>void*</b></t> private__0;<br />
+						&MediumSpace; &MediumSpace;<t><b>void*</b></t> private__1;<br />
+					} <t>xtlpNodesStack</t>;<br />
+				</div>
+				<span style="font-weight: 600; font-size: 170%;">xtlpNode</span><br />
+				Every xtlpNode represents section of XTL file. Due to every section may be named or unnamed, <span style="color: #f10d0c;">Name</span> member may contain empty string (pointer always is valid). <span style="color: #f10d0c;">Pairs</span> are keys and their values defined in node scope.
+				Access to subsections is done through <span style="color: #f10d0c;">Childs</span> member. <span style="color: #f10d0c;">private__</span> member is only for internal usage.<br /><br />
+				<span style="font-weight: 600; font-size: 170%;">xtlpNodesStack</span><br />
+				This class keeps all necessary resources. Do not free this manually - for creation you must use <span style="color: #f10d0c;">xtlpMakeStack</span> and for deallocation <span style="color: #f10d0c;">xtlpRemoveStack</span>. All private memebers are for only internal usage.<br /><br />
+				Access to subsections is done through <span style="color: #f10d0c;">Childs</span> member. <span style="color: #f10d0c;">private__</span> member is only for internal usage.<br /><br />
+				<span style="font-weight: 600; font-size: 170%;">Memory management</span><br />
+				Firstly for open, read and process XTL file you have to call <span style="color: #f10d0c;">xtlpMakeStack</span> function. It takes two arguments - FileName and StackAddress. FileName is just path to your xtl file. StackAddress is output parameter. It must be not NULL. If it is not, then undefined behavior will appear.
+				Recommended way is just define xtlpNodesStack on memory stack, initialize it as zero and pass it by reference. Returned value is array of pointers to nodes in root scope.<br /><br />
+
+				Second function is <span style="color: #f10d0c;">xtlpRemoveStack</span>. It deallocates everything what has been allocated earlier by xtlpMakeStack function. What do you have to pass are just xtlpNodesStack data passed by reference and returned array of nodes in root scope.<br /><br />
+				<span style="font-weight: 600; font-size: 170%;">How to use - example</span><br />
+				Firstly, define XTL file named cfg.xtl:
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px; color: #5e7eff;">
+					&lt;XTH<br />
+					&MediumSpace; &MediumSpace; <xtL_key>v</xtL_key>=<xtl_val>'100'</xtl_val><br />
+				&lt;students<br />
+					&MediumSpace; &MediumSpace; &lt;student0<br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>name</xtl_key>=<xtl_val>'Ben'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>age</xtl_key>=<xtL_val>'23'</xtL_val><br />
+					&MediumSpace; &MediumSpace; &lt;student1<br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>name</xtl_key>=<xtl_val>'John</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>age</xtl_key>=<xtl_val>'28'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &lt;grades<br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>physical_education</xtl_key>=<xtl_val>'4'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>biology</xtl_key>=<xtl_val>'3'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>chemistry</xtl_key>=<xtl_val>'2'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>physics</xtl_key>=<xtl_val>'5'</xtl_val><br />
+				&lt;<br />
+					&MediumSpace; &MediumSpace; <span style="color: #00c6ff;">unnamed_key</span>=<span style="color: #a7074b;">'ghf'</span><br />
+				</div><br />
+				Now define our C code in xtl.c:
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
+					<b>#include</b> <str>&lt;xtlp-100.h&gt;</str><br />
+					<b>#include</b> <str>&lt;stddef.h&gt;</str><br />
+					<b>#include</b> <str>&lt;stdio.h&gt;</str><br /><br />
+					<b>void</b> <f>DisplayContent</f>(<b>const</b> <t>xtlpNodes</t> Nodes)<br />
+					{<br />
+						&MediumSpace; &MediumSpace; <b>for</b> (<b>int</b> NodeID = 0; Nodes[NodeID] != <b>NULL</b>; NodeID++)<br />
+						&MediumSpace; &MediumSpace; {<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>printf</f>(<str>"Node name: %s\n"</str>, Nodes[NodeID]->Name);<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <b>for</b> (<b>int</b> PairID = 0; Nodes[NodeID]->Pairs[PairID].Key != <b>NULL</b>; PairID++)<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; {<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>printf</f>(<str>"Pair: %s = %s\n"</str>, Nodes[NodeID]->Pairs[PairID].Key, Nodes[NodeID]->Pairs[PairID].Value);<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; }<br />
+							&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <f>DisplayContent</f>(Nodes[NodeID]->Childs);<br />
+						&MediumSpace; &MediumSpace; }<br />
+					}<br /><br />
+
+					<b>int</b> <f>main</f>()<br />
+					{<br />
+						&MediumSpace; &MediumSpace; <t>xtlpNodesStack</t> Stack = {};<br />
+						&MediumSpace; &MediumSpace; <t>xtlpNodes</t> RootNodes = <f>xtlpMakeStack</f>(<str>"cfg.xtl"</str>, &Stack);<br />
+						&MediumSpace; &MediumSpace; <f>DisplayContent</f>(Nodes);<br />
+						&MediumSpace; &MediumSpace; <f>xtlpRemoveStack</f>(&Stack, Nodes);<br /><br />
+						&MediumSpace; &MediumSpace; <b>return</b> 0;<br />
+					}
+				</div><br />
+				We will start overview from setup to read XTL file. As you can see <span style="color: #f10d0c;">xtlpNodesStack</span> is initialized with zeros. <span style="color: #f10d0c;">This is important</span>, because on other hand potential undefined behavior will appear.
+				Nextly we just call <span style="color: #f10d0c;">xtlpMakeStack</span> function which read and process XTL file to achieve data structure based on tree. Make attention to pass our earlier created xtlpNodesStack object by reference!
+				Passing invalid pointer will result as undefined behavior. After processing we get RootNodes variable which contains all nodes from root scope of tree. Starting from them we can check data recursively. This is what is going on in our <span style="color: #f10d0c;">DisplayContent</span> function.
+				After printing everything into console we should deallocate all memory by calling <span style="color: #f10d0c;">xtlpRemoveStack</span> function.<br />
+				So, when walkthrough of code is done, now compile our code:
+				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
+					$ gcc -std=c23 -O3 -o xtl_exe xtl.c -lxtpc<br />
+					$ sudo chmod +x xtl_exe<br />
+					$ ./xtl_exe
+				</div><br />
+				Then we will see content of our xtl file:
+				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
+					Node name: XTH<br />
+					Pair: v = 100<br />
+					Node name: students<br />
+					Node name: student0<br />
+					Pair: age = 23<br />
+					Pair: name = Ben<br />
+					Node name: student1<br />
+					Pair: age = 28<br />
+					Pair: name = John<br />
+					Node name: grades<br />
+					Pair: biology = 3<br />
+					Pair: chemistry = 2<br />
+					Pair: physical_education = 4<br />
+					Pair: physics = 5<br />
+					Node name: null<br />
+					Pair: unnamed_key = ghf<br />
+				</div><br />
+				Make some attention for node named <span style="color: #f10d0c;">null</span>. This is unnamed section - just XTLP automatically renames unnamed sections into <span style="color: #f10d0c;">null</span>.
+			</div>
+		</section>
+	</body>
+</html>
