@@ -1,14 +1,15 @@
 cmake_minimum_required(VERSION 3.24)
 
-message(STATUS "Checking for options...")
-option(SANITIZER_ENABLED "If set ON enables sanitizer option when build.")
+include("../revision.cmake")
 
-message(STATUS "SANITIZER_ENABLED: ${SANITIZER_ENABLED}")
+if (${GENERATE_TEST})
+	message(STATUS "GENERATE_TEST enabled. Currently this target does not support it.")
+endif()
 
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED true)
 
-project(xtlpc VERSION 100 LANGUAGES C)
+project(xtlpc VERSION ${REVISION} LANGUAGES C)
 
 set(NAME ${PROJECT_NAME}-${CMAKE_PROJECT_VERSION})
  

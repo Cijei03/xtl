@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.24)
 
+include("../revision.cmake")
+
+if (${GENERATE_TEST})
+	message(STATUS "GENERATE_TEST enabled. Currently this target does not support it.")
+endif()
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
-project(xtlp VERSION 100 LANGUAGES CXX)
+project(xtlp VERSION ${REVISION} LANGUAGES CXX)
 
 set(NAME ${PROJECT_NAME}-${CMAKE_PROJECT_VERSION})
 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../../fonts.css">
+		<link rel="stylesheet" href="../../core.css">
+		<link rel="shortcut icon" href="../../resources/xtl_minilogo.webp" type="image/x-icon">
+		<style>
+			b
+			{
+				font-weight: 600;
+				color: black;
+			}
+			f
+			{
+				color: #ff7b00;
+			}
+			str
+			{
+				color: #00aa00;
+			}
+			t
+			{
+				color: #4400ff;
+			}
+
+			xtl_key
+			{
+				color:#00c6ff;
+			}
+			xtl_val
+			{
+				color:#a7074b;
+			}
+		</style>
+		<title>XTL</title>
+	</head>
+	<body>
+		<header style="text-align: center; font-weight: 600; font-size: 170%; padding: 2vh 0vh 3vh 0vh; height: 3vh; float: left;">
+			XTLP Java - How to use
+		</header>
+		<section style="text-align: center;">
+			<div style="font-weight: 300; margin-top: 20px; float: left; text-align: left;">
+				Core of XTLP are two classes - xtlpRoot and xtlpNode.<br /><br />
+				Their definition looks like:<br />
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
+					<b>public class </b> <t>xtlpNode</t><br />
+					{<br />
+						&MediumSpace; &MediumSpace;<b>public</b> <t>String</t> Name;<br />
+						&MediumSpace; &MediumSpace;<b>public</b> <t>TreeMap&lt;String, String&gt;</t> Pairs;<br />
+						&MediumSpace; &MediumSpace;<b>public</b> <t>ArrayList&lt;xtlpNode&gt;</t> Childs;<br />
+					}<br />
+					<b>public class</b> <t>xtlpRoot</t><br />
+					{<br />
+						&MediumSpace; &MediumSpace;<b>public</b> <t>ArrayList&lt;xtlpNode&gt;</t> Nodes;<br />
+					}<br />
+				</div>
+				<span style="font-weight: 600; font-size: 170%;">xtlpNode</span><br />
+				Every xtlpNode represents section of XTL file. Due to every section may be named or unnamed, <span style="color: #f10d0c;">Name</span> member may contain empty string. <span style="color: #f10d0c;">Pairs</span> are keys and their values defined in node scope.<br />
+				Access to subsections is done through <span style="color: #f10d0c;">Childs</span> member.<br /><br />
+				<span style="font-weight: 600; font-size: 170%;">xtlpRoot</span><br />
+				This class handles nodes allocations and deallocations, reads XTL files and processes its content into tree representation. To read XTL file you have to simply create object of xtlpRoot with parametrized constructor. Path into XTL file is enough. After load process all nodes in root scope are available in returned xtlpRoot objects through <span style="color: #f10d0c;">Nodes</span> member.
+				<br /><br />
+				<span style="font-weight: 600; font-size: 170%;">How to use - example</span><br />
+				Firstly, define XTL file named cfg.xtl:
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px; color: #5e7eff;">
+					&lt;XTH<br />
+					&MediumSpace; &MediumSpace; <xtL_key>v</xtL_key>=<xtl_val>'100'</xtl_val><br />
+				&lt;students<br />
+					&MediumSpace; &MediumSpace; &lt;student0<br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>name</xtl_key>=<xtl_val>'Ben'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>age</xtl_key>=<xtL_val>'23'</xtL_val><br />
+					&MediumSpace; &MediumSpace; &lt;student1<br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>name</xtl_key>=<xtl_val>'John</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>age</xtl_key>=<xtl_val>'28'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &lt;grades<br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>physical_education</xtl_key>=<xtl_val>'4'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>biology</xtl_key>=<xtl_val>'3'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>chemistry</xtl_key>=<xtl_val>'2'</xtl_val><br />
+						&MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; &MediumSpace; <xtl_key>physics</xtl_key>=<xtl_val>'5'</xtl_val><br />
+				&lt;<br />
+					&MediumSpace; &MediumSpace; <span style="color: #00c6ff;">unnamed_key</span>=<span style="color: #a7074b;">'ghf'</span><br />
+				</div><br />
+				Now define our Java code in Test.java:
+				<div style="font-family: monospace; font-weight: 300; padding: 2%; width: 96%;; background-color: #e6e6e6; float: left; margin-top: 20px; text-align: left; margin-bottom: 20px;">
+					<b>import</b> <t>java.util.ArrayList</t>;<br />
+					<br />
+					<b>import</b> <t>xtlp.xtlpNode</t>;<br />
+					<b>import</b> <t>xtlp.xtlpRoot</t>;<br />
+					<br />
+					<b>public class</b> <t>Test</t><br />
+					{<br />
+						&MediumSpace; &MediumSpace;<b>private static void</b> <f>DisplayContent</f>(<t>ArrayList&lt;xtlpNode&gt;</t> Nodes)<br />
+						&MediumSpace; &MediumSpace;{<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<b>for</b> (<b>var</b> N : Nodes)<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;{<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<t>System.out.</t><f>println</f>(<t>String</t>.<f>format</f>(<str>"Node name: %s"</str>, N.Name));<br />
+								<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<b>for</b> (<b>var</b> P : N.Pairs.<f>entrySet</f>())<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;{<br />
+									&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<t>System.out.</t><f>println</f>(<t>String.</t><f>format</f>(<str>"Pair: %s = %s"</str>, P.<f>getKey</f>(), P.<f>getValue</f>()));<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;}<br />
+								<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<f>DisplayContent</f>(N.Childs);<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;}<br />
+						&MediumSpace; &MediumSpace;}<br />
+						&MediumSpace; &MediumSpace;<b>public static void</b> <f>main</f>(<t>String[]</t> args)<br />
+						&MediumSpace; &MediumSpace;{<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<b>try</b><br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;{<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<t>xtlpRoot</t> Root = <b>new</b> <t>xtlpRoot</t>(<str>"cfg.xtl"</str>);<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<t>Test</t>.<f>DisplayContent</f>(Root.Nodes);<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;}<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<b>catch</b>(<t>java.io.IOException</t> e)<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;{<br />
+								&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;<t>System.err.</t><f>println</f>(<str>"IOERROR"</str>);<br />
+							&MediumSpace; &MediumSpace;&MediumSpace; &MediumSpace;}<br />
+						&MediumSpace; &MediumSpace;}<br />
+					}<br />
+				</div><br />
+				As you can see code is simple. Just create xtlpRoot object and it is everything. Now we can easily iterate over XTL tree and print its content recursively. This is what we are doing in <span style="color: #f10d0c;">Test.DisplayContent</span> method.<br />
+				<br />
+				You may ask why everything is in <span style="color: #f10d0c;">try-catch</span> clausule - we must handle exception when for example our XTL file does not exist. So now, we can build our code:
+				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
+					$ javac Test.java<br />
+					$ jar cf test.jar Test.class<br />
+					$ java -cp ".:libxtlp-100-j21.jar" Test
+				</div><br />
+				Then we will see content of our xtl file:
+				<div style="color:#000000; font-weight: 300; font-family: monospace; background-color: rgb(212, 212, 212); padding: 1px 3px 1px 3px; margin-top: 10px;">
+					Node name: XTH<br />
+					Pair: v = 100<br />
+					Node name: students<br />
+					Node name: student0<br />
+					Pair: age = 23<br />
+					Pair: name = Ben<br />
+					Node name: student1<br />
+					Pair: age = 28<br />
+					Pair: name = John<br />
+					Node name: grades<br />
+					Pair: biology = 3<br />
+					Pair: chemistry = 2<br />
+					Pair: physical_education = 4<br />
+					Pair: physics = 5<br />
+					Node name: null<br />
+					Pair: unnamed_key = ghf<br />
+				</div><br />
+				Make some attention for node named <span style="color: #f10d0c;">null</span>. This is unnamed section - just XTLP automatically renames unnamed sections into <span style="color: #f10d0c;">null</span>.
+			</div>
+		</section>
+	</body>
+</html>
